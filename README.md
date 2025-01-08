@@ -1,0 +1,2 @@
+# Sistema_de_gerenciamento_de_funcionarios
+ O "Sistema de Gerenciamento de Funcionários" é uma aplicação web desenvolvida em PHP com front-end simples usando HTML e CSS. O projeto permite cadastrar, listar e exibir informações detalhadas de funcionários de diferentes categorias de contratação: CLT, PJ (Pessoa Jurídica) e Freelancer. O objetivo é utilizar conceitos avançados de programação orientada a objetos em PHP, como herança, interfaces, classes abstratas, e modificadores de acesso, integrados a um sistema funcional.
