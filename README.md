@@ -43,7 +43,7 @@ Um sistema web desenvolvido em PHP que permite gerenciar funcionários de difere
 ## 📂 Estrutura de Arquivos
 
 ```plaintext
-project/
+sistema_de_gerenciamento_de_funcionarios/
 ├── index.php                # Página inicial com formulário e listagem
 ├── src/
 │   ├── models/
