@@ -1,0 +1,208 @@
+/* Estilos gerais */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Fundo dark */
+    color: #e0e0e0; /* Texto claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-flow: column nowrap;
+}
+
+p {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #4CAF50;
+}
+
+/* Estilo da seção principal */
+.principal {
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+}
+
+/* Estilo do card */
+.card {
+    background-color: #1e1e1e; /* Fundo do card */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border: 1px solid #333; /* Borda sutil */
+}
+
+.cardCadastrar {
+    max-width: 500px;
+}
+
+/* Título */
+.card h2 {
+    font-size: 1.8rem;
+    color: #4CAF50; /* Verde para destaque */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilo do formulário */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilo dos labels */
+label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #b0b0b0; /* Texto suavizado */
+}
+
+/* Estilo dos inputs e selects */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select {
+    background-color: #222; /* Fundo escuro */
+    border: 1px solid #444; /* Borda discreta */
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    margin-top: 5px;
+    color: #e0e0e0; /* Texto claro */
+    transition: all 0.3s ease;
+}
+
+/* Estilo ao focar no input */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+select:focus {
+    border-color: #4CAF50; /* Destaque verde */
+    outline: none;
+    background-color: #2a2a2a; /* Fundo levemente mais claro ao focar */
+}
+
+/* Botão de submit */
+input[type="submit"] {
+    background-color: #4CAF50; /* Botão verde */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover no botão */
+input[type="submit"]:hover {
+    background-color: #45a049; /* Verde mais escuro */
+}
+
+/* Remove as setas nos campos number */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Remove o estilo das setas */
+    margin: 0; /* Remove o espaço extra */
+}
+
+/* Para o Firefox */
+input[type="number"] {
+    -moz-appearance: textfield; /* Remove as setas no Firefox */
+}
+
+/* Estilos para permitir a rolagem horizontal na tabela */
+.card {
+    overflow-x: auto; /* Permite a rolagem horizontal */
+    -webkit-overflow-scrolling: touch; /* Melhor para dispositivos móveis */
+}
+
+/* Estilos para a tabela de funcionários */
+.funcionarios {
+    width: 100%;
+    min-width: 600px; /* Define uma largura mínima para a tabela, ajustável conforme necessário */
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.funcionarios th,
+.funcionarios td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #444;
+}
+
+.funcionarios th {
+    background-color: #333;
+    color: #fff;
+}
+
+.funcionarios tbody tr:nth-child(even) {
+    background-color: #2c2c2c;
+}
+
+.funcionarios tbody tr:nth-child(odd) {
+    background-color: #1e1e1e;
+}
+
+.funcionarios tbody tr:hover {
+    background-color: #444;
+}
+
+.funcionarios td {
+    color: #ddd;
+}
+
+/* Ajustes para o layout responsivo */
+@media screen and (max-width: 768px) {
+    .funcionarios th, .funcionarios td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .funcionarios {
+        font-size: 14px;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .card {
+        padding: 15px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    select {
+        font-size: 0.9rem;
+    }
+
+    input[type="submit"] {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card h2 {
+        font-size: 1.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    select {
+        font-size: 0.85rem;
+    }
+
+    input[type="submit"] {
+        font-size: 0.85rem;
+    }
+}

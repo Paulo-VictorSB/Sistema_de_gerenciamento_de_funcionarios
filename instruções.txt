@@ -6,7 +6,7 @@ Cada categoria tem métodos específicos para calcular o salário com base em re
 Utilizar classes, herança, construtores, modificadores de acesso, classes abstratas e interfaces para organizar o código.
 Criar uma interface web para interagir com o sistema.
 Estrutura do Projeto
-Front-end (HTML + Bootstrap)
+Front-end (HTML)
 Interface web para exibir e interagir com os funcionários.
 
 Back-end (PHP)
