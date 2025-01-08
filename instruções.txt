@@ -1,0 +1,13 @@
+Descrição do Projeto
+Objetivo: Criar um sistema que gerencie funcionários de uma empresa com base nos seguintes requisitos:
+
+Funcionários podem ser de diferentes categorias: CLT, PJ, ou Freelancer.
+Cada categoria tem métodos específicos para calcular o salário com base em regras distintas.
+Utilizar classes, herança, construtores, modificadores de acesso, classes abstratas e interfaces para organizar o código.
+Criar uma interface web para interagir com o sistema.
+Estrutura do Projeto
+Front-end (HTML + Bootstrap)
+Interface web para exibir e interagir com os funcionários.
+
+Back-end (PHP)
+Implementação das classes e regras de negócio.
