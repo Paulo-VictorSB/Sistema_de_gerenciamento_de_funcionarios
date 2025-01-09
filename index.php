@@ -1,8 +1,8 @@
 <?php require("src/helpers/header.php"); ?>
 
 <section class="principal">
-    <div class="card">
-        <h2>Funcionários Cadastrados</h2>
+    <h2>Funcionários Cadastrados</h2>
+    <form class="card" action="cadastro.php" method="post">
         <table class="funcionarios">
             <thead>
                 <tr>
@@ -18,6 +18,7 @@
                     <th>Vale transporte</th>
                     <th>Plano de saúde</th>
                     <th>Salário base</th>
+                    <th>Salário Liquido</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +35,7 @@
                     <td>X</td>
                     <td>X</td>
                     <td>R$ 3.000,00</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Ana Carolina</td>
@@ -48,6 +50,7 @@
                     <td>X</td>
                     <td></td>
                     <td>R$ 5.000,00</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Lucas Lima</td>
@@ -62,6 +65,7 @@
                     <td></td>
                     <td>X</td>
                     <td>R$ 10.000,00</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>João Pedro</td>
@@ -76,6 +80,7 @@
                     <td>X</td>
                     <td></td>
                     <td>R$ 4.500,00</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Mariana Souza</td>
@@ -90,11 +95,12 @@
                     <td></td>
                     <td>X</td>
                     <td>R$ 4.000,00</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
+        <input type="submit" value="Novo usuário" style="margin-top: 10px; width: 130px;">
     </div>
 </section>
-
 
 <?php require("src/helpers/footer.php"); ?>

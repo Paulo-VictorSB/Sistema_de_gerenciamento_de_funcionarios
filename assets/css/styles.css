@@ -10,6 +10,15 @@ body {
     align-items: center;
     min-height: 100vh;
     flex-flow: column nowrap;
+    overflow-x: hidden;
+}
+
+.glowing-ball {
+    position: absolute;
+    background: radial-gradient(circle, #4CAF50, rgba(0, 255, 0, 0.2));
+    border-radius: 50%;
+    filter: blur(300px); /* Efeito de brilho */
+    z-index: -1; /* Faz a bola ficar atrás de outros elementos */
 }
 
 p {
@@ -34,12 +43,26 @@ p {
     border: 1px solid #333; /* Borda sutil */
 }
 
+.card button {
+    background-color: #45a049;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.card::-webkit-scrollbar{
+    height: 1px;
+}
+
+
 .cardCadastrar {
     max-width: 500px;
 }
 
 /* Título */
-.card h2 {
+h2 {
     font-size: 1.8rem;
     color: #4CAF50; /* Verde para destaque */
     margin-bottom: 20px;
@@ -136,6 +159,7 @@ input[type="number"] {
     padding: 10px;
     text-align: left;
     border: 1px solid #444;
+    white-space: nowrap; /* Evita que o texto quebre linhas */
 }
 
 .funcionarios th {
@@ -157,6 +181,11 @@ input[type="number"] {
 
 .funcionarios td {
     color: #ddd;
+}
+
+input[type="checkbox"]:checked + label::before, 
+input[type="radio"]:checked + label::before {
+    background-color: #4CAF50; /* Altera a cor de fundo quando marcado */
 }
 
 /* Ajustes para o layout responsivo */

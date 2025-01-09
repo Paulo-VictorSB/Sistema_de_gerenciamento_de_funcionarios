@@ -1,9 +1,76 @@
-<?php require("src/helpers/header.php"); ?>
+<?php 
+    require("src/helpers/database.php");
+    require("src/models/funcionario.php");
+    require("src/models/CLT.php");
+    require("src/models/Freelancer.php");
+    require("src/models/PJ.php");
+    require("src/models/SalarioCalculavel.php");
+    require("src/helpers/header.php");
+
+    $databse = new CreateDB();
+    $databse->create_archive_db();
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $mensagem = [];        
+
+        if (preg_match('/\d/', $_POST['nome'])){
+            $mensagem[] = 'O Nome não pode conter números.';
+        } else {
+            $nome = $_POST['nome'];
+        }
+        
+        if (strlen($_POST['cpf']) !== 11){
+            $mensagem[] = 'O CPF deve conter 11 dígitos.';
+        } else {
+            $cpf = $_POST['cpf'];
+        }
+
+        if (!preg_match('/^9\d{8}$/', $_POST['celular'])){
+            $mensagem[] = 'O número deve conter 9 dígitos, começando com 9.';
+        } else {
+            $celular = $_POST['celular'];
+        }
+        
+        if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $_POST['email'])) {
+            $mensagem[] = 'Email inválido.';
+        } else {
+            $email = $_POST['email'];
+        }
+
+        switch ($_POST['tipoContratacao']) {
+            case 'CLT':
+                if($_POST['salario'] <= 0){
+                    $mensagem[] = 'Salário não pode ser menor ou igual a 0.';
+                } else {
+                    $salario = $_POST['salario'];
+                }
+                $funcionario = new CLT($nome, $cpf, $contato, $email, $contratacao, $cargo, $senioridade, $salario, $_POST['beneficio'], $_POST['vt'], $_POST['plano_saude']);
+                $funcionario->adicionarFuncionario();
+                break;
+            // case 'Freelancer':
+            //     $funcionario = new Freelancer();
+            //     break;
+            // case 'PJ':
+            //     $funcionario = new PJ();
+            //     break;
+            default:
+                throw new Exception("Tipo de contratação inválido.");
+        }
+
+        // $_POST['tipoContratacao']
+        // $_POST['cargo']
+        // $_POST['senioridade']
+        // $_POST['salario']
+        // $_POST['beneficio']
+        // $_POST['vt']
+        // $_POST['plano_saude']
+    }
+?>
 
 <section class="cardCadastrar principal">
     <div class="card">
         <h2>Cadastrar Funcionário</h2>
-        <form action="post">
+        <form method="post">
             <label for="nome">Nome:</label>
             <input type="text" name="nome" id="nome" placeholder="Paulo Victor" required>
 
@@ -54,22 +121,31 @@
             </select>
 
             <label for="salario">Sálario:</label>
-            <input type="number" name="salario" id="salario">
+            <input type="number" name="salario" id="salario" required>
 
             <div id="beneficios">
                 <p>Benefícios</p>
                 <label for="va">Vale Alimentação</label>
                 <input type="radio" name="beneficio" id="va" value="va">
                 
-                <label for="vr">Vale Refeição (VR)</label>
+                <label for="vr">Vale Refeição</label>
                 <input type="radio" name="beneficio" id="vr" value="vr">
 
-                <label for="vt">Vale Transporte (VT)</label>
-                <input type="checkbox" name="vt" id="vt">
+                <label for="vt">Vale Transporte</label>
+                <input type="checkbox" name="vt" id="vt" value="vtYes">
 
                 <label for="plano_saude">Plano de Saúde</label>
-                <input type="checkbox" name="plano_saude" id="plano_saude">
+                <input type="checkbox" name="plano_saude" id="plano_saude" value="plano_saudeYes">
             </div>
+
+            <?php if (count($mensagem) > 0): ?>
+                <ul>
+            <?php foreach ($mensagem as $msg): ?>
+                <li><?= $msg ?></li>
+            <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+
 
             <input type="submit" value="Cadastrar">
         </form>
