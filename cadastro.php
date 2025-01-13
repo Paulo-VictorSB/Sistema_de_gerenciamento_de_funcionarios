@@ -2,9 +2,7 @@
     require("src/helpers/database.php");
     require("src/models/funcionario.php");
     require("src/models/CLT.php");
-    require("src/models/Freelancer.php");
     require("src/models/PJ.php");
-    require("src/models/SalarioCalculavel.php");
     require("src/helpers/header.php");
 
     $databse = new CreateDB();
@@ -55,37 +53,34 @@
             $plano_saude = "";
         }
 
+        if($_POST['salario'] <= 0){
+            $mensagem[] = 'Salário não pode ser menor ou igual a 0.';
+        } else {
+            $salario = $_POST['salario'];
+        }
+
         switch ($_POST['tipoContratacao']) {
             case 'CLT':
-
-                if($_POST['salario'] <= 0){
-                    $mensagem[] = 'Salário não pode ser menor ou igual a 0.';
-                } else {
-                    $salario = $_POST['salario'];
-                }
-
-                if($mensagem == ''){
+                if(empty($mensagem)){
                     $funcionario = new CLT($nome, $cpf, $contato, $email, $_POST['cargo'], $_POST['senioridade'], $salario, $beneficio, $vt, $plano_saude);
+                    $funcionario->calcularDescontos();
                     $funcionario->adicionarFuncionario();
+                    header("location: ./index.php");
+                    exit();
                 }
-
                 break;
-
-
-            // case 'Freelancer':
-            //     $funcionario = new Freelancer();
-            //     break;
-            // case 'PJ':
-            //     $funcionario = new PJ();
-            //     break;
+            case 'PJ':
+                if(empty($mensagem)){
+                    $funcionario = new PJ($nome, $cpf, $contato, $email, $_POST['cargo'], $_POST['senioridade'], $salario, $beneficio, $vt, $plano_saude);
+                    $funcionario->calcularDescontos();
+                    $funcionario->adicionarFuncionario();
+                    header("location: ./index.php");
+                    exit();
+                }
+                break;
             default:
                 throw new Exception("Tipo de contratação inválido.");
         }
-
-    if($mensagem == "")   {
-        header("location: index.php");
-    }
-
     }
 ?>
 
@@ -94,16 +89,16 @@
         <h2>Cadastrar Funcionário</h2>
         <form method="post">
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" placeholder="Lorem ipsum" required>
+            <input type="text" name="nome" id="nome" placeholder="Lorem ipsum" value="Paulo Victor"required>
 
             <label for="CPF">CPF:</label>
-            <input type="number" name="CPF" id="CPF" placeholder="12345678901" required>
+            <input type="number" name="CPF" id="CPF" placeholder="12345678901" value="70938713485"required>
 
             <label for="celular">Contato:</label>
-            <input type="number" name="celular" id="celular" placeholder="9 ****-****" required>
+            <input type="number" name="celular" id="celular" placeholder="9 ****-****" value="999906183"required>
 
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email" placeholder="exemple@gmail.com" required>
+            <input type="email" name="email" id="email" placeholder="exemple@gmail.com" value="paulovdbarbosa@gmail.com"required>
 
             <label for="tipoContratacao">Contratação:</label>
             <select name="tipoContratacao" id="tipoContratacao" required>
@@ -114,36 +109,36 @@
 
             <label for="cargo">Cargo:</label>
             <select name="cargo" id="cargo" required>
-                <option value="desenvolvedor_frontend">Desenvolvedor Front-End</option>
-                <option value="desenvolvedor_backend">Desenvolvedor Back-End</option>
-                <option value="desenvolvedor_fullstack">Desenvolvedor Full Stack</option>
-                <option value="engenheiro_software">Engenheiro de Software</option>
-                <option value="analista_dados">Analista de Dados</option>
-                <option value="cientista_dados">Cientista de Dados</option>
-                <option value="engenheiro_dados">Engenheiro de Dados</option>
-                <option value="devops">Engenheiro DevOps</option>
-                <option value="administrador_sistemas">Administrador de Sistemas</option>
-                <option value="administrador_banco_dados">Administrador de Banco de Dados</option>
-                <option value="analista_seguranca">Analista de Segurança da Informação</option>
-                <option value="engenheiro_redes">Engenheiro de Redes</option>
-                <option value="arquiteto_solucoes">Arquiteto de Soluções</option>
-                <option value="especialista_cloud">Especialista em Cloud</option>
-                <option value="testador_qa">Analista de Testes/QA</option>
-                <option value="gerente_ti">Gerente de TI</option>
-                <option value="scrum_master">Scrum Master</option>
-                <option value="product_owner">Product Owner</option>
-                <option value="ux_ui_designer">UX/UI Designer</option>
+            <option value="Desenvolvedor Front-End">Desenvolvedor Front-End</option>
+                <option value="Desenvolvedor Back-End">Desenvolvedor Back-End</option>
+                <option value="Desenvolvedor Full Stack">Desenvolvedor Full Stack</option>
+                <option value="Engenheiro de Software">Engenheiro de Software</option>
+                <option value="Analista de Dados">Analista de Dados</option>
+                <option value="Cientista de Dados">Cientista de Dados</option>
+                <option value="Engenheiro de Dados">Engenheiro de Dados</option>
+                <option value="Engenheiro DevOps">Engenheiro DevOps</option>
+                <option value="Administrador de Sistemas">Administrador de Sistemas</option>
+                <option value="Administrador de Banco de Dados">Administrador de Banco de Dados</option>
+                <option value="Analista de Segurança da Informação">Analista de Segurança da Informação</option>
+                <option value="Engenheiro de Redes">Engenheiro de Redes</option>
+                <option value="Arquiteto de Soluções">Arquiteto de Soluções</option>
+                <option value="Especialista em Cloud">Especialista em Cloud</option>
+                <option value="Analista de Testes/QA">Analista de Testes/QA</option>
+                <option value="Gerente de TI">Gerente de TI</option>
+                <option value="Scrum Master">Scrum Master</option>
+                <option value="Product Owner">Product Owner</option>
+                <option value="UX/UI Designer">UX/UI Designer</option>
             </select>
 
             <label for="senioridade">Senioridade:</label>
             <select name="senioridade" id="senioridade" required>
-                <option value="junior" selected>Júnior</option>
-                <option value="pleno">Pleno</option>
-                <option value="senior">Sênior</option>
+                <option value="Júnior" selected>Júnior</option>
+                <option value="Pleno">Pleno</option>
+                <option value="Sênior">Sênior</option>
             </select>
 
             <label for="salario">Sálario:</label>
-            <input type="number" name="salario" id="salario" required>
+            <input type="number" name="salario" id="salario" value="5000"required>
 
             <div id="beneficios">
                 <p>Benefícios</p>
