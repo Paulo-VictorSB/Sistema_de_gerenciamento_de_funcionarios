@@ -2,7 +2,8 @@
 
 <section class="principal">
     <h2>Funcionários Cadastrados</h2>
-    <form class="card" action="cadastro.php" method="post">
+    <div class="card">
+        <button id="novo_funcionario">Novo funcionário</button>
         <table class="funcionarios">
             <thead>
                 <tr>
@@ -99,7 +100,7 @@
                 </tr>
             </tbody>
         </table>
-        <input type="submit" value="Novo usuário" style="margin-top: 10px; width: 130px;">
+        <div>
     </div>
 </section>
 

@@ -32,6 +32,21 @@ class funcionario extends CreateDB{
 
     public function adicionarFuncionario(){
         $this->dados_completos = $this->get_dados();
+
+        if($this->contratacao === 'CLT'){
+            if($this->beneficio === 'va' || $this->beneficio === 'vr'){
+                $this->salario -= 120;
+            } 
+            if($this->vt == "vtYes"){
+                $this->salario -= 0.06*$this->salario;
+            }
+            if($this->plano_de_saude == "plano_saudeYes"){
+                $this->salario -= 0.2*$this->salario;
+            }
+        } else {
+            $mensagem[] = "funcionario errado";
+        }
+
         $dbopen = fopen($this->get_db(), 'a');
         fputcsv($dbopen, $this->dados_completos, ',', '"', '');
         fclose($dbopen);

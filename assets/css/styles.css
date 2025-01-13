@@ -188,6 +188,10 @@ input[type="radio"]:checked + label::before {
     background-color: #4CAF50; /* Altera a cor de fundo quando marcado */
 }
 
+#novo_funcionario:hover {
+    cursor: pointer;
+}
+
 /* Ajustes para o layout responsivo */
 @media screen and (max-width: 768px) {
     .funcionarios th, .funcionarios td {

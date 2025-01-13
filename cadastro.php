@@ -9,9 +9,9 @@
 
     $databse = new CreateDB();
     $databse->create_archive_db();
+    $mensagem = [];        
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $mensagem = [];        
 
         if (preg_match('/\d/', $_POST['nome'])){
             $mensagem[] = 'O Nome não pode conter números.';
@@ -19,16 +19,16 @@
             $nome = $_POST['nome'];
         }
         
-        if (strlen($_POST['cpf']) !== 11){
+        if (strlen($_POST['CPF']) !== 11){
             $mensagem[] = 'O CPF deve conter 11 dígitos.';
         } else {
-            $cpf = $_POST['cpf'];
+            $cpf = $_POST['CPF'];
         }
 
         if (!preg_match('/^9\d{8}$/', $_POST['celular'])){
             $mensagem[] = 'O número deve conter 9 dígitos, começando com 9.';
         } else {
-            $celular = $_POST['celular'];
+            $contato = $_POST['celular'];
         }
         
         if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $_POST['email'])) {
@@ -37,16 +37,41 @@
             $email = $_POST['email'];
         }
 
+        if(!empty($_POST['beneficio'])){
+            $beneficio = $_POST['beneficio'];
+        } else {
+            $beneficio = "";
+        }
+
+        if(!empty($_POST['vt'])){
+            $vt = $_POST['vt'];
+        } else {
+            $vt = "";
+        }
+
+        if(!empty($_POST['plano_saude'])){
+            $plano_saude = $_POST['plano_saude'];
+        } else {
+            $plano_saude = "";
+        }
+
         switch ($_POST['tipoContratacao']) {
             case 'CLT':
+
                 if($_POST['salario'] <= 0){
                     $mensagem[] = 'Salário não pode ser menor ou igual a 0.';
                 } else {
                     $salario = $_POST['salario'];
                 }
-                $funcionario = new CLT($nome, $cpf, $contato, $email, $contratacao, $cargo, $senioridade, $salario, $_POST['beneficio'], $_POST['vt'], $_POST['plano_saude']);
-                $funcionario->adicionarFuncionario();
+
+                if($mensagem == ''){
+                    $funcionario = new CLT($nome, $cpf, $contato, $email, $_POST['cargo'], $_POST['senioridade'], $salario, $beneficio, $vt, $plano_saude);
+                    $funcionario->adicionarFuncionario();
+                }
+
                 break;
+
+
             // case 'Freelancer':
             //     $funcionario = new Freelancer();
             //     break;
@@ -57,13 +82,10 @@
                 throw new Exception("Tipo de contratação inválido.");
         }
 
-        // $_POST['tipoContratacao']
-        // $_POST['cargo']
-        // $_POST['senioridade']
-        // $_POST['salario']
-        // $_POST['beneficio']
-        // $_POST['vt']
-        // $_POST['plano_saude']
+    if($mensagem == "")   {
+        header("location: index.php");
+    }
+
     }
 ?>
 
@@ -72,7 +94,7 @@
         <h2>Cadastrar Funcionário</h2>
         <form method="post">
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" placeholder="Paulo Victor" required>
+            <input type="text" name="nome" id="nome" placeholder="Lorem ipsum" required>
 
             <label for="CPF">CPF:</label>
             <input type="number" name="CPF" id="CPF" placeholder="12345678901" required>
@@ -115,7 +137,7 @@
 
             <label for="senioridade">Senioridade:</label>
             <select name="senioridade" id="senioridade" required>
-                <option value="junior">Júnior</option>
+                <option value="junior" selected>Júnior</option>
                 <option value="pleno">Pleno</option>
                 <option value="senior">Sênior</option>
             </select>
