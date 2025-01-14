@@ -13,7 +13,8 @@ class PJ extends funcionario{
         $this->plano_de_saude = $plano_de_saude;
         $this->contratacao = 'PJ';
         $this->cargo = $cargo;
-        $this->salario = $salario;
+        $this->salario_base = $salario;
+        $this->salario_liquido = $salario;
     }
 
     public function calcularDescontos(){

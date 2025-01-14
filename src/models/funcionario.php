@@ -8,11 +8,12 @@ class funcionario extends CreateDB{
     protected $contratacao;
     protected $cargo;
     protected $senioridade;
-    protected $salario;
+    protected $salario_base;
     protected $beneficio;
     protected $vt;
     protected $plano_de_saude;
     protected $dados_completos;
+    protected $salario_liquido;
 
     public function get_dados(){
         return [
@@ -26,7 +27,8 @@ class funcionario extends CreateDB{
             $this->beneficio,
             $this->vt,
             $this->plano_de_saude,
-            $this->salario
+            $this->salario_base,
+            $this->salario_liquido
         ];
     }
 

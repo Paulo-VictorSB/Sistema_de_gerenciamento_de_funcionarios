@@ -14,8 +14,7 @@
         <th>Contratação</th>
         <th>Cargo</th>
         <th>Senioridade</th>
-        <th>Vale alimentação</th>
-        <th>Vale refeição</th>
+        <th>Benefício</th>
         <th>Vale transporte</th>
         <th>Plano de saúde</th>
         <th>Salário base</th>
@@ -24,20 +23,37 @@
 </thead>
 <tbody>
 <?php
-$file = 'src/helpers/DB.csv'; // Caminho para o arquivo CSV
+$file = 'src/helpers/DB.csv';
 $handle = fopen($file, 'r');
 if ($handle) {
     while (($linha = fgetcsv($handle, 1000, ',')) !== false) {
         echo "<tr>";
         
         for ($i = 0; $i < count($linha); $i++) {
-            
+            switch ($linha[$i]) {
+                case 'va':
+                    echo "<td>Vale Alimentação</td>";
+                    break;
+                case 'vr':
+                    echo "<td>Vale Refeição</td>";
+                    break;
+                case 'vtYes':
+                    echo "<td>X</td>";
+                    break;
+                case 'plano_saudeYes':
+                    echo "<td>X</td>";
+                    break;
+                default:
+                    echo "<td>" . $linha[$i] . "</td>";
+                    break;
+            }
         }
         echo "</tr>";
     }
     fclose($handle);
 }
 ?>
+
 </tbody>
         </table>
         <div>
